@@ -1,7 +1,7 @@
-import Header from "./Header";
 import SyncLoader from "react-spinners/SyncLoader";
 import { useContext } from "react";
 import { ProductRecommendationContext } from "../../Context/ProductRecommendationContext";
+import Header from "./Header";
 
 export default function Layout({children}: any){
     const { loading }: any = useContext(ProductRecommendationContext);
