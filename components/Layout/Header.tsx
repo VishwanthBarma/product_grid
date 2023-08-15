@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
@@ -8,10 +8,12 @@ import Link from "next/link";
 
 export default function Header(){
     const router = useRouter();
-    const { setLoading }: any = useContext(ProductRecommendationContext);
+    const { setLoading, user, userName, userImage }: any = useContext(ProductRecommendationContext);
+
+    const userId = user;
 
     const isCartPage = router.pathname == '/cart';
-    const isUserPage = router.pathname == '/user';
+    const isUserPage = router.pathname == `/user/${userId}`;
 
 
     return(
@@ -29,9 +31,9 @@ export default function Header(){
                 </div>
             </div>
 
-            <Link href={"/user"} className={`${isUserPage && 'text-sky-500'} flex items-center space-x-1 cursor-pointer`}>
-                <CgProfile className="text-2xl"/>
-                <h1 className="font-bold">User01</h1>
+            <Link href={`/user/${userId}`} className={`${isUserPage && 'text-sky-500'} flex items-center space-x-1 cursor-pointer`}>
+                <img className="h-10 w-10 rounded-full" src={ userImage }></img>
+                <h1 className="font-bold">{userName}</h1>
             </Link>
 
             <Link href={"/cart"} className={`${isCartPage && 'text-sky-500'} flex items-center space-x-1 cursor-pointer`}>

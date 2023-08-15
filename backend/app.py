@@ -10,6 +10,17 @@ CORS(app)
 
 
 products_csv_path = 'gridDB/productsDB.csv'
+user_db_path = 'gridDB/usersDB.csv'
+
+
+@app.route('/api/all-user-details', methods=['GET'])
+def get_all_user_details():
+    try:
+        user_data = pd.read_csv(user_db_path)
+        user_list = user_data.to_dict(orient='records')
+        return user_list
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 @app.route('/api/product-details/<int:product_id>', methods=['GET'])

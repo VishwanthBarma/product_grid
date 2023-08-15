@@ -18,10 +18,14 @@ const Home: NextPage = () => {
           topProducts,
           setTopProducts,
           similarProducts,
-          setSimilarProducts
+          setSimilarProducts,
+          userName
           }: any = useContext(ProductRecommendationContext);
 
   const userId = user;
+
+  console.log(userId);
+  console.log(userName)
 
   const getRecommendations = async() => {
     setRecLoading(true)
