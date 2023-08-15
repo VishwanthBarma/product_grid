@@ -1,7 +1,7 @@
 import React from 'react'
 import Product from '../Components/Product'
 
-function PersonalizedProducts() {
+function PersonalisedProducts() {
   return (
     <div className='flex flex-col p-5 space-y-5'>
         <h1 className='font-bold text-xl'>Products Based On Category</h1>
@@ -42,4 +42,4 @@ function PersonalizedProducts() {
   )
 }
 
-export default PersonalizedProducts;
+export default PersonalisedProducts;

@@ -44,14 +44,6 @@ const Home: NextPage = () => {
     setRecLoading(false)
   }
 
-  console.log("Personalised Products : ")
-  console.log(personalisedProducts)
-
-  console.log("Top Products: ")
-  console.log(topProducts)
-
-  console.log("Similar User Products: ");
-  console.log(similarProducts);
 
   return (
     <div className='m-2 p-3'>
@@ -86,67 +78,51 @@ const Home: NextPage = () => {
           </div>
           <div className='flex space-x-2 mt-2'>
 
-            <div onClick={() => router.push("/personalizedproducts")} className='bg-neutral-100 rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-lg'>
-              <h1 className='text-center font-semibold mb-3'>Personalized Products</h1>
+          <div onClick={() => router.push('/personalisedproducts')} className='bg-neutral-100 rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-xl shadow-lg'>
+              <h1 className='text-center font-semibold mb-3 text-xl bg-neutral-200 p-1 rounded-xl'>Personalised Products</h1>
 
-              <div className="grid grid-cols-2 gap-4">
-                  <div>
-                      <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="" />
-                  </div>
-                  <div>
-                      <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="" />
-                  </div>
-                  <div>
-                      <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="" />
-                  </div>
-                  <div>
-                      <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="" />
-                  </div>
+              <div className="grid grid-cols-2 gap-4 place-content-center mt-3">
+              {
+                  personalisedProducts?.slice(0,4).map((item:any) => (
+                    <div className='flex justify-center items-center border-2 rounded-xl p-2'>
+                        <img className="h-40 max-w-full rounded-lg" src={item.images![0]} alt="" />
+                    </div>
+                  ))
+                }
               </div>
-
             </div>
 
 
-            <div onClick={() => router.push('/topproducts')} className='bg-neutral-100 rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-lg'>
-              <h1 className='text-center font-semibold mb-3'>Top Products</h1>
-              
-              <div className="grid grid-cols-2 gap-4">
-                  <div>
-                      <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="" />
-                  </div>
-                  <div>
-                      <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="" />
-                  </div>
-                  <div>
-                      <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="" />
-                  </div>
-                  <div>
-                      <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="" />
-                  </div>
-              </div>
+            <div onClick={() => router.push('/topproducts')} className='bg-neutral-100 rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-xl shadow-lg'>
+              <h1 className='text-center font-semibold mb-3 text-xl bg-neutral-200 p-1 rounded-xl'>Top Products</h1>
 
+              <div className="grid grid-cols-2 gap-4 place-content-center mt-3">
+              {
+                  topProducts?.slice(0,4).map((item:any) => (
+                    <div className='flex justify-center items-center border-2 rounded-xl p-2'>
+                        <img className="h-40 max-w-full rounded-lg" src={item.images![0]} alt="" />
+                    </div>
+                  ))
+                }
+              </div>
             </div>
 
 
-            <div onClick={() => router.push('/similaruserproducts')} className='bg-neutral-100 rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-lg'>
-              <h1 className='text-center font-semibold mb-3'>Based On Similar Users</h1>
+            <div onClick={() => router.push('/similaruserproducts')} className='bg-neutral-100 rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-xl shadow-lg'>
+              <h1 className='text-center font-semibold mb-3 text-xl bg-neutral-200 p-1 rounded-xl'>Based On Similar Users</h1>
 
-              <div className="grid grid-cols-2 gap-4">
-                  <div>
-                      <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="" />
-                  </div>
-                  <div>
-                      <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="" />
-                  </div>
-                  <div>
-                      <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="" />
-                  </div>
-                  <div>
-                      <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="" />
-                  </div>
+              <div className="grid grid-cols-2 gap-4 place-content-center mt-3">
+              {
+                  similarProducts?.slice(0,4).map((item:any) => (
+                    <div className='flex justify-center items-center border-2 rounded-xl p-2'>
+                        <img className="h-40 max-w-full rounded-lg" src={item.images![0]} alt="" />
+                    </div>
+                  ))
+                }
               </div>
-
             </div>
+
+
           </div>
 
         </div>

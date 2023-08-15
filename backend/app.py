@@ -24,6 +24,9 @@ def get_personalised_products(user_id):
         if not matching_rows.empty:
             product_info = matching_rows.iloc[0]
 
+            images_list = product_info['images'].split('|')
+            image_urls = [url.strip() for url in images_list if url.strip()]
+
             recommended_product = {
                 'id': product_id,
                 'name': product_info['product_name'],
@@ -34,7 +37,7 @@ def get_personalised_products(user_id):
                 'price': product_info['price'],
                 'original_price': product_info['original_price'],
                 'discount': product_info['discount'],
-                'images': product_info['images'],
+                'images': image_urls,
                 'seller': product_info['seller'],
                 'seller_rating': product_info['seller_rating'],
                 'return_policy': product_info['return_policy'],
@@ -64,6 +67,9 @@ def get_top_products(user_id):
         if not matching_rows.empty:
             product_info = matching_rows.iloc[0]
 
+            images_list = product_info['images'].split('|')
+            image_urls = [url.strip() for url in images_list if url.strip()]
+
             recommended_product = {
                 'id': product_id,
                 'name': product_info['product_name'],
@@ -74,7 +80,7 @@ def get_top_products(user_id):
                 'price': product_info['price'],
                 'original_price': product_info['original_price'],
                 'discount': product_info['discount'],
-                'images': product_info['images'],
+                'images': image_urls,
                 'seller': product_info['seller'],
                 'seller_rating': product_info['seller_rating'],
                 'return_policy': product_info['return_policy'],
@@ -103,7 +109,10 @@ def get_similar_products(user_id):
 
         if not matching_rows.empty:
             product_info = matching_rows.iloc[0]
-            
+
+            images_list = product_info['images'].split('|')
+            image_urls = [url.strip() for url in images_list if url.strip()]
+
             recommended_product = {
                 'id': product_id,
                 'name': product_info['product_name'],
@@ -114,7 +123,7 @@ def get_similar_products(user_id):
                 'price': product_info['price'],
                 'original_price': product_info['original_price'],
                 'discount': product_info['discount'],
-                'images': product_info['images'],
+                'images': image_urls,
                 'seller': product_info['seller'],
                 'seller_rating': product_info['seller_rating'],
                 'return_policy': product_info['return_policy'],
