@@ -19,7 +19,7 @@ export const ProductRecommendationContext = createContext<contextState | null>(n
 export const ProductRecommendationProvider = ({children}: any) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    const [user, setUser] = useState<number | null>(1);
+    const [user, setUser] = useState<number | null>(59);
     const [personalisedProducts, setPersonalisedProducts] = useState<[]| null>(null);
     const [topProducts, setTopProducts] = useState<[]| null>(null);
     const [similarProducts, setSimilarProducts] = useState<[]| null>(null);

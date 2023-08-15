@@ -8,7 +8,7 @@ import { ProductRecommendationContext } from '../Context/ProductRecommendationCo
 
 function Product({image, name, description, rating, price, stock, productId}: any) {
     const router = useRouter();
-    
+
     
   return (
     <div onClick={() => router.push(`/product/${productId}`)} className='bg-neutral-100 p-3 rounded-xl flex flex-col space-y-1 hover:shadow-lg cursor-pointer justify-center'>
