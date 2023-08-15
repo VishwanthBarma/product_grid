@@ -10,16 +10,33 @@ import { SyncLoader } from 'react-spinners';
 const Home: NextPage = () => {
   const router = useRouter();
   const [recLoading, setRecLoading] = useState(false);
+  const [fetchMessage, setFetchMessage] = useState("");
 
-  const {user, setLoading, setRecommendedProducts, recommendedProducts}: any = useContext(ProductRecommendationContext);
+  const { user,
+          personalisedProducts,
+          setPersonalisedProducts,
+          topProducts,
+          setTopProducts,
+          similarProducts,
+          setSimilarProducts
+          }: any = useContext(ProductRecommendationContext);
 
   const userId = user;
 
   const getRecommendations = async() => {
     setRecLoading(true)
     try {
-      const response = await axios.get(`http://127.0.0.1:5000/api/recommended-products/${userId}`);
-      setRecommendedProducts(response.data);
+      setFetchMessage("Generating Personlised Products...")
+      const personalisedProductsFetch = await axios.get(`http://127.0.0.1:5000/api/recommended-products/${userId}`);
+      setPersonalisedProducts(personalisedProductsFetch.data);
+
+      setFetchMessage("Genrating Top Prodcuts...")
+      const topProductFetch = await axios.get(`http://127.0.0.1:5000/api//top-products/${userId}`);
+      setTopProducts(topProductFetch.data);
+
+      setFetchMessage("Generating Similar User Products...")
+      const similarProductsFetch = await axios.get(`http://127.0.0.1:5000/api/similar-products/${userId}`)
+      setSimilarProducts(similarProductsFetch.data);
 
     } catch (error) {
       console.error('Error fetching recommended products:', error);
@@ -27,6 +44,14 @@ const Home: NextPage = () => {
     setRecLoading(false)
   }
 
+  console.log("Personalised Products : ")
+  console.log(personalisedProducts)
+
+  console.log("Top Products: ")
+  console.log(topProducts)
+
+  console.log("Similar User Products: ");
+  console.log(similarProducts);
 
   return (
     <div className='m-2 p-3'>
@@ -36,14 +61,17 @@ const Home: NextPage = () => {
       </Head>
 
       {
-        !recommendedProducts ?
+        !(similarProducts && personalisedProducts && topProducts) ?
 
         <div className='flex flex-col items-center justify-center bg-neutral-100 rounded-xl p-5'>
           {
             recLoading ?
             <div className='felx flex-col justify-center text-center'>
               <SyncLoader color="rgb(14 165 233)" size={20} />
-              <h1 className='font-semibold m-3 bg-neutral-200 p-2 px-10 rounded-xl mt-4'>Fetching the recommended products...</h1>
+              <div className='items-center flex space-x-2 m-3 bg-neutral-200 p-2 px-10 rounded-xl mt-4'>
+                <h1 className='animate-spin'>+</h1>
+                <h1 className='font-semibold '>{fetchMessage}</h1>
+              </div>
             </div>
             :
             <button onClick={getRecommendations} className='text-center font-semibold bg-sky-500 p-2 rounded-xl px-5 text-white hover:shadow-lg active:bg-sky-600'>Get Recommendations</button>
