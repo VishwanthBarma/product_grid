@@ -1,27 +1,35 @@
-import axios from 'axios';
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { ProductRecommendationContext } from '../Context/ProductRecommendationContext';
+import axios from 'axios';
+import { json } from 'stream/consumers';
 
-const Home: NextPage = () => {
+const Home: NextPage = ({products}:any) => {
   const [recommendedProducts, setRecommendedProducts] = useState([]);
   const router = useRouter();
 
-  useEffect(() => {
+  const {user, setLoading}: any = useContext(ProductRecommendationContext);
 
-    const fetchRecommendedProducts = async() =>{
+  useEffect(() => {
+    const fetchRecommendedProducts = async() => {
+      // setLoading(true);
       try {
-        const response = await axios.get('http://127.0.0.1:5000/api/recommended-products');
-        setRecommendedProducts(response.data);
+        const response = await fetch(`/api/fetchproducts?user=${user}`);
+        const data = await response.json();
+        setRecommendedProducts(data);
+        console.log("Came here...");
       } catch (error) {
-        console.log(error);
+        console.error('Error fetching recommended products:', error);
       }
+      // setLoading(false);
     }
 
     fetchRecommendedProducts();
-  
-  }, []);
+
+  }, [user])
+
   return (
     <div className='m-2'>
       <Head>
@@ -35,8 +43,30 @@ const Home: NextPage = () => {
           <h1 className='font-bold text-center text-lg text-neutral-400'>RECOMMENDATIONS</h1>
         </div>
         <div className='flex space-x-2 mt-2'>
-          <div onClick={() => router.push('/personalizedproducts')} className='bg-neutral-100 rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-lg'>
+
+          <div onClick={() => router.push("/personalizedproducts")} className='bg-neutral-100 rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-lg'>
             <h1 className='text-center font-semibold mb-3'>Personalized Products</h1>
+
+            <div className="grid grid-cols-2 gap-4">
+                <div>
+                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="" />
+                </div>
+                <div>
+                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="" />
+                </div>
+                <div>
+                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="" />
+                </div>
+                <div>
+                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="" />
+                </div>
+            </div>
+
+          </div>
+
+
+          <div onClick={() => router.push('/topproducts')} className='bg-neutral-100 rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-lg'>
+            <h1 className='text-center font-semibold mb-3'>Top Products</h1>
             
             <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -54,25 +84,8 @@ const Home: NextPage = () => {
             </div>
 
           </div>
-          <div onClick={() => router.push("/categoryproducts")} className='bg-neutral-100 rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-lg'>
-            <h1 className='text-center font-semibold mb-3'>Based On Category</h1>
 
-            <div className="grid grid-cols-2 gap-4">
-                <div>
-                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="" />
-                </div>
-                <div>
-                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="" />
-                </div>
-                <div>
-                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="" />
-                </div>
-                <div>
-                    <img className="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="" />
-                </div>
-            </div>
 
-          </div>
           <div onClick={() => router.push('/similaruserproducts')} className='bg-neutral-100 rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-lg'>
             <h1 className='text-center font-semibold mb-3'>Based On Similar Users</h1>
 
@@ -101,4 +114,16 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Home;
+
+// export const getServerSideProps = async () => {
+
+//   try {
+//     const response = await axios.get(`http://127.0.0.1:5000/api/recommended-products/1`);
+//     const products = response.data;
+//     return { props: { products } };
+//   } catch (error) {
+//     console.error('Error fetching products:', error);
+//     return { props: { products: [] } };
+//   }
+// };

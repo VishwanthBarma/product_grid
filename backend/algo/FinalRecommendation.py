@@ -6,7 +6,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 user_product_csv_path = os.path.join(os.getcwd(), 'gridDB', 'userProductRelation.csv')
 products_csv_path = os.path.join(os.getcwd(), 'gridDB', 'productsDB.csv')
 
-def FinalRecommendations(user_id,num_recommendations):
+def FinalRecommendation(user_id,num_recommendations):
     user_product_df = pd.read_csv(user_product_csv_path)
     products_df = pd.read_csv(products_csv_path) 
     merged_df = user_product_df.merge(products_df, on='product_id', how='left')

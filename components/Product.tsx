@@ -1,15 +1,17 @@
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useContext } from 'react'
 import { AiFillStar } from "react-icons/ai";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
+import { ProductRecommendationContext } from '../Context/ProductRecommendationContext';
 
 
 function Product() {
     const router = useRouter();
-    const id = 1;
+    const { user }:any = useContext(ProductRecommendationContext);
+    
   return (
-    <div onClick={() => router.push(`/product/${id}`)} className='bg-neutral-100 p-3 rounded-xl flex flex-col space-y-1 hover:shadow-lg cursor-pointer'>
+    <div onClick={() => router.push(`/product/${user}`)} className='bg-neutral-100 p-3 rounded-xl flex flex-col space-y-1 hover:shadow-lg cursor-pointer'>
         <img className="h-auto max-w-full rounded-lg mb-2" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="" />
         <h1 className=''>Title</h1>
         <h1 className='text-xs text-neutral-400'>Description</h1>
