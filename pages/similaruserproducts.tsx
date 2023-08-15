@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import Product from '../Components/Product'
+import Product from '../components/Product'
 import { ProductRecommendationContext } from '../Context/ProductRecommendationContext'
 
 function SimilaruserProducts() {

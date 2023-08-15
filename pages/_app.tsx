@@ -1,5 +1,5 @@
 import { ProductRecommendationProvider } from '../Context/ProductRecommendationContext'
-import Layout from '../Components/Layout/Layout'
+import Layout from '../components/Layout/Layout'
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 

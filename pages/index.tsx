@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { ProductRecommendationContext } from '../Context/ProductRecommendationContext';
 import axios from 'axios';
-import SlideShow from '../Components/SlideShow';
+import SlideShow from '../components/SlideShow';
 import { SyncLoader } from 'react-spinners';
 
 const Home: NextPage = () => {
@@ -23,9 +23,6 @@ const Home: NextPage = () => {
           }: any = useContext(ProductRecommendationContext);
 
   const userId = user;
-
-  console.log(userId);
-  console.log(userName)
 
   const getRecommendations = async() => {
     setRecLoading(true)
