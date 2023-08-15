@@ -31,7 +31,7 @@ const Home: NextPage = () => {
       setPersonalisedProducts(personalisedProductsFetch.data);
 
       setFetchMessage("Genrating Top Prodcuts...")
-      const topProductFetch = await axios.get(`http://127.0.0.1:5000/api//top-products/${userId}`);
+      const topProductFetch = await axios.get(`http://127.0.0.1:5000/api/top-products/${userId}`);
       setTopProducts(topProductFetch.data);
 
       setFetchMessage("Generating Similar User Products...")
