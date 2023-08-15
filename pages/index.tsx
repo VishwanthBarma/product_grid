@@ -8,11 +8,10 @@ import SlideShow from '../Components/SlideShow';
 import { SyncLoader } from 'react-spinners';
 
 const Home: NextPage = () => {
-  const [recommendedProducts, setRecommendedProducts] = useState(null);
   const router = useRouter();
   const [recLoading, setRecLoading] = useState(false);
 
-  const {user, setLoading}: any = useContext(ProductRecommendationContext);
+  const {user, setLoading, setRecommendedProducts, recommendedProducts}: any = useContext(ProductRecommendationContext);
 
   const userId = user;
 
