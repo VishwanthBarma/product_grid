@@ -13,8 +13,7 @@ export default function Header(){
     const userId = user;
 
     const isCartPage = router.pathname == '/cart';
-    const isUserPage = router.pathname == `/user/${userId}`;
-
+    const isUserPage = router.pathname == '/user/[userId]';
 
     return(
         <div className="sticky top-0 z-50 bg-neutral-100 p-2 px-60 items-center flex justify-between shadow-neutral-300 shadow-sm">
@@ -32,7 +31,7 @@ export default function Header(){
             </div>
 
             <Link href={`/user/${userId}`} className={`${isUserPage && 'text-sky-500'} flex items-center space-x-1 cursor-pointer`}>
-                <img className="h-10 w-10 rounded-full" src={ userImage }></img>
+                <img className={`h-10 w-10 rounded-full ${isUserPage && "border-2"} border-sky-500`} src={ userImage }></img>
                 <h1 className="font-bold">{userName}</h1>
             </Link>
 

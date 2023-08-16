@@ -48,7 +48,7 @@ function ProductPage({product}: any) {
         <p className="text-gray-600 text-sm">{product.return_policy}</p>
         
         <div className='flex space-x-4 mt-4'>
-            <button className="bg-blue-500 font-semibold text-white px-6 py-3 rounded-xl shadow-md hover:bg-blue-600">
+            <button className="bg-sky-500 font-semibold text-white px-6 py-3 rounded-xl shadow-md hover:bg-sky-600">
             Add to Cart
             </button>
             <button className='p-3 bg-neutral-100 rounded-xl border-2 hover:bg-neutral-200'>Add to Wishlist</button>

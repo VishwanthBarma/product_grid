@@ -8,10 +8,10 @@ function PersonalisedProducts() {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>([]);
 
-    const categories = Array.from(new Set(personalisedProducts.map((product:any) => product.category)));
-    const subcategories = Array.from(new Set(personalisedProducts.map((product: any) => product.sub_category)));
+    const categories = Array.from(new Set(personalisedProducts?.map((product:any) => product.category)));
+    const subcategories = Array.from(new Set(personalisedProducts?.map((product: any) => product.sub_category)));
 
-    const filteredProducts = personalisedProducts.filter((product:any) => {
+    const filteredProducts = personalisedProducts?.filter((product:any) => {
         if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
         return false;
         }
@@ -26,7 +26,7 @@ function PersonalisedProducts() {
         <h1 className='font-bold text-xl'>Products Based On Category</h1>
 
         <div className='flex space-x-5'>
-            <div className=' bg-neutral-100 w-1/5 p-5 rounded-xl max-h-[800px] h-full'>
+            <div className=' bg-neutral-100 w-1/5 p-5 rounded-xl max-h-[800px] h-full sticky left-0'>
                 <h1 className='font-bold  text-lg mb-3 border-b-2 border-black'>Select Category</h1>
                 <div className='overflow-y-scroll text-neutral-700 flex flex-col items-start space-y-4 font-semibold text-lg'>
                     

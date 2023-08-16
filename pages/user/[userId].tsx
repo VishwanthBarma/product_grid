@@ -29,8 +29,8 @@ function User({user, usersData}: any) {
   return (
     <div className='p-5 flex'>
         <div className='w-1/2 flex flex-col items-center space-y-2'>
-            <img className='h-80 w-80 rounded-full items-center' src={user?.user_image}></img>
-            <h1 className='font-bold text-2xl text-neutral-700'>{user?.user_name}</h1>
+            <img className='h-80 w-80 rounded-full items-center border-2 border-sky-500 p-2' src={user?.user_image}></img>
+            <h1 className='font-bold text-2xl text-sky-500'>{user?.user_name}</h1>
             <h1>{user?.user_email}</h1>
             <h1>{user?.user_mobile}</h1>
         </div>

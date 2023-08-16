@@ -25,7 +25,7 @@ function Product({image, name, description, rating, price, stock, productId}: an
             <BsCurrencyRupee/>
             { price }
         </h1>
-        <h1 className='text-sm text-green-600'>{ stock }</h1>
+        <h1 className='text-sm text-red-600'>{ stock }</h1>
         <div className='flex justify-between space-x-2'>
             <button className='bg-sky-500 p-2 rounded-xl flex-1 font-sembold text-white hover:bg-sky-400 active:bg-sky-600'>
                 <h1 className='font-bold'>ADD TO CART</h1>
