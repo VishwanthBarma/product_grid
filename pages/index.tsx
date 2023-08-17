@@ -19,6 +19,8 @@ const Home: NextPage = () => {
           setTopProducts,
           similarProducts,
           setSimilarProducts,
+          cartData,
+          setCartData,
           userName
           }: any = useContext(ProductRecommendationContext);
 
@@ -38,6 +40,10 @@ const Home: NextPage = () => {
       setFetchMessage("Generating Similar User Products...")
       const similarProductsFetch = await axios.get(`http://127.0.0.1:5000/api/similar-products/${userId}`)
       setSimilarProducts(similarProductsFetch.data);
+
+      const cartDataFetch = await axios.get(`http://127.0.0.1:5000/api/get-cart/${userId}`)
+      setCartData(cartDataFetch.data);
+
 
     } catch (error) {
       console.error('Error fetching recommended products:', error);
@@ -80,7 +86,7 @@ const Home: NextPage = () => {
           <div className='bg-sky-500 rounded-xl p-2'>
             <h1 className='font-bold text-center text-lg text-white'>RECOMMENDATIONS</h1>
           </div>
-          <div className='flex space-x-2 mt-2'>
+          <div className='flex space-x-5 mt-2'>
 
           <div onClick={() => router.push('/personalisedproducts')} className='bg-neutral-100 rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-xl shadow-lg'>
               <h1 className='text-center font-semibold mb-3 text-xl bg-neutral-200 p-1 rounded-xl'>Personalised Products</h1>

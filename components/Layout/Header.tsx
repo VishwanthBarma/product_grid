@@ -35,7 +35,7 @@ export default function Header(){
                 <h1 className="font-bold">{userName}</h1>
             </Link>
 
-            <Link href={"/cart"} className={`${isCartPage && 'text-sky-500'} flex items-center space-x-1 cursor-pointer`}>
+            <Link href={`/cart/${userId}`} className={`${isCartPage && 'text-sky-500'} flex items-center space-x-1 cursor-pointer`}>
                 <AiOutlineShoppingCart className="text-2xl"/>
                 <h1 className="font-bold">Cart</h1>
             </Link>

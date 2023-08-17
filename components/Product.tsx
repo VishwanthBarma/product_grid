@@ -9,19 +9,30 @@ import axios from 'axios';
 
 function Product({image, name, description, rating, price, stock, productId}: any) {
     const router = useRouter();
-    const {user}: any = useContext(ProductRecommendationContext);
-    const [inCart, setInCart] = useState(false);
+    const {user: userId, cartData, setCartData}: any = useContext(ProductRecommendationContext);
+
+    console.log(cartData);
+    console.log("product id")
+    console.log(productId);
+
+    const isProductInCart = cartData.some((item:any) => item.product_id === productId);
+
+    const [inCart, setInCart] = useState(isProductInCart);
 
     const addToCart = async () => {
         try {
           const response = await axios.post('/api/add-to-cart', {
-            userId: user,
+            userId: userId,
             productId: productId,
           });
     
           if (response.data.success) {
             console.log('Product added to cart successfully');
             setInCart(true);
+
+            const cartDataFetch = await axios.get(`http://127.0.0.1:5000/api/get-cart/${userId}`)
+            setCartData(cartDataFetch.data);
+
           }
         } catch (error) {
           console.error('Error adding product to cart:', error);
@@ -54,7 +65,7 @@ function Product({image, name, description, rating, price, stock, productId}: an
                     <h1 className='font-bold'>ADD TO CART</h1>
                 </button>
                 :
-                <h1 className='font-bold bg-sky-500 p-2 rounded-xl flex-1 font-sembold text-white text-center'>PRODUCT IN CART</h1>
+                <h1 className='font-bold border-2 border-sky-500 p-2 rounded-xl flex-1 font-sembold text-neutral-700 text-center'>PRODUCT IN CART</h1>
             }
             <button className='bg-white p-2 rounded-xl fle font-sembold text-white active:bg-sky-600 hover:bg-neutral-600'>
                 <AiOutlineHeart className='text-pink-500 text-2xl'/>
