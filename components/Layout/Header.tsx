@@ -8,11 +8,13 @@ import Link from "next/link";
 
 export default function Header(){
     const router = useRouter();
-    const { setLoading, user, userName, userImage }: any = useContext(ProductRecommendationContext);
+    const { setLoading, user, userName, userImage, cartData }: any = useContext(ProductRecommendationContext);
+
+    const cartNumber = cartData?.length
 
     const userId = user;
 
-    const isCartPage = router.pathname == '/cart';
+    const isCartPage = router.pathname == '/cart/[userId]';
     const isUserPage = router.pathname == '/user/[userId]';
 
     return(
@@ -35,9 +37,15 @@ export default function Header(){
                 <h1 className="font-bold">{userName}</h1>
             </Link>
 
-            <Link href={`/cart/${userId}`} className={`${isCartPage && 'text-sky-500'} flex items-center space-x-1 cursor-pointer`}>
+            <Link href={`/cart/${userId}`} className={`${isCartPage && 'text-sky-500'} flex relative items-center space-x-1 cursor-pointer`}>
                 <AiOutlineShoppingCart className="text-2xl"/>
                 <h1 className="font-bold">Cart</h1>
+                {
+                    cartNumber > 0 &&
+                    <div className="flex items-center justify-center bg-rose-500 rounded-full h-5 w-5">
+                        <h1 className="font-bold text-white text-xs">{cartNumber}</h1>
+                    </div>
+                }
             </Link>
         </div>
     )
