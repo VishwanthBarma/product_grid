@@ -55,7 +55,7 @@ function cart({cartData}: any) {
 
   return (
     <div className='flex space-x-2 m-2 p-2'>
-        <div className='w-3/4 bg-neutral-100 p-5 rounded-xl'>
+        <div className='w-3/4 bg-white p-5 rounded-xl'>
             <h1 className='font-bold text-2xl mb-3 border-b-2'>Shopping Cart</h1>
             <div className='flex flex-col max-h-[calc(100vh-200px)] overflow-y-scroll space-y-2'>
 
@@ -64,7 +64,7 @@ function cart({cartData}: any) {
                 cartData.map((product:any) => <CartProduct image={product.images} name={product.product_name} price={product.price} stock={product.stock} />)
                 :
                 <>
-                    <h1 className='font-semibold text-center bg-neutral-200 p-2 rounded-xl'>No Products In Cart</h1>
+                    <h1 className='font-semibold text-center bg-neutral-2100 p-2 rounded-xl'>No Products In Cart</h1>
                     <button onClick={() => router.push("/personalisedproducts")} className='font-bold mt-2 text-sky-500 hover:text-sky-600 active:text-sky-400'>Continue Shopping</button>
                 </>
             }
@@ -72,7 +72,7 @@ function cart({cartData}: any) {
             </div>
         </div>
 
-        <div className='w-1/4 bg-neutral-100 rounded-xl flex flex-col space-y-2 p-3'>
+        <div className='w-1/4 bg-white rounded-xl flex flex-col space-y-2 p-3 h-full'>
             <h1 className='font-bold text-neutral-500 text-center text-lg'>Price Details</h1>
             <div className='flex flex-col'>
                 <div className='flex justify-between'>
@@ -88,7 +88,7 @@ function cart({cartData}: any) {
                     </h1>
                 </div>
             </div>
-            <div className='flex justify-between bg-white border-2 p-2 rounded-xl items-center'>
+            <div className='flex justify-between bg-slate-100 border-2 p-2 rounded-xl items-center'>
                 <h1 className='font-semibold'>Total amount</h1>
                 <h1 className='font-bold text-lg text-green-500 flex items-center'>
                     <BsCurrencyRupee/>{amount}
