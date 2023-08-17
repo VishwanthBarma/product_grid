@@ -29,12 +29,12 @@ function Product({image, name, description, rating, price, stock, productId}: an
       };
     
   return (
-    <div className='bg-neutral-100 p-3 rounded-xl flex flex-col space-y-1 hover:shadow-lg justify-center'>
+    <div className='bg-neutral-100 p-3 rounded-xl flex flex-col space-y-1 hover:shadow-lg justify-center h-max'>
         <div onClick={() => router.push(`/product/${productId}`)} className='flex flex-col space-y-1  cursor-pointer'>
             <div className='flex justify-center items-center rounded-xl'>
                 <img className="h-40 max-w-full rounded-xl" src={ image } alt="" />
             </div>
-            <h1 className=''>{ name }</h1>
+            <h1 className=''>{`${name.substring(0, 40)}...`}</h1>
             <h1 className='text-xs text-neutral-400'>{`${description.substring(0, 100)}...`}</h1>
         </div>
         <div className='flex space-x-1 items-center bg-green-600 text-white font-bold w-16 justify-center rounded-xl'>

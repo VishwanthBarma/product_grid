@@ -26,7 +26,7 @@ function PersonalisedProducts() {
         <h1 className='font-bold text-xl'>Products Based On Category</h1>
 
         <div className='flex space-x-5'>
-            <div className=' bg-neutral-100 w-1/5 p-5 rounded-xl max-h-[800px] h-full sticky left-0'>
+            <div className=' bg-neutral-100 w- p-5 rounded-xl h-full sticky left-0'>
                 <h1 className='font-bold  text-lg mb-3 border-b-2 border-black'>Select Category</h1>
                 <div className='overflow-y-scroll text-neutral-700 flex flex-col items-start space-y-4 font-semibold text-lg'>
                     
@@ -85,22 +85,25 @@ function PersonalisedProducts() {
 
 
             </div>
-            <div className="grid grid-cols-3 gap-4 w-4/5 place-content-center">
-
-          {
-            filteredProducts?.map((product: any) => (<Product
-              key={product?.id}
-               image={product?.images[0]}
-               rating={product?.avg_rating}  
-               name={product?.name}
-               description={product?.description}
-               price={product?.price}
-               stock={product?.stock}
-               productId = {product?.id}
-                />))
-          }
-
-        </div>
+            <div className="grid grid-cols-3 gap-4 w-4/5">
+                {
+                    filteredProducts.length != 0 ?
+                    filteredProducts?.map((product: any) => (<Product
+                    key={product?.id}
+                    image={product?.image}
+                    rating={product?.avg_rating}  
+                    name={product?.name}
+                    description={product?.description}
+                    price={product?.price}
+                    stock={product?.stock}
+                    productId = {product?.id}
+                        />))
+                    :
+                    <div className='bg-neutral-100 p-5 rounded-xl'>
+                        <h1 className='font-semibold text-center'>No Products</h1>
+                    </div>
+                }
+            </div>
         </div>
 
         

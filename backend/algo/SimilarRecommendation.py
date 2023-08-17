@@ -22,8 +22,7 @@ def similar_users(user_index, interactions_matrix):
 
 
 def similarRecommendations(user_index, num_recommendations):
-    df = pd.read_csv(product_ratings_csv_path, header=None)
-    df.columns = ['user_id', 'product_id', 'rating']
+    df = pd.read_csv(product_ratings_csv_path)
     counts = df['user_id'].value_counts()
     df_final = df[df['user_id'].isin(counts[counts >= 50].index)]
     final_ratings_matrix = df_final.pivot(index='user_id', columns='product_id', values='rating').fillna(0)

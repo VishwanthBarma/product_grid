@@ -9,7 +9,7 @@ function ProductPage({product}: any) {
     <div className="flex p-6">
   {/* Product Image */}
     <div className="w-1/3">
-        <img src={product?.images[0]} alt="Product" className="max-w-full h-[600px] object-fit rounded-xl" />
+        <img src={product?.image} alt="Product" className="max-w-full h-[600px] object-fit rounded-xl" />
     </div>
     
     {/* Product Content */}

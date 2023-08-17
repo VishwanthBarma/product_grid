@@ -45,14 +45,6 @@ const Home: NextPage = () => {
     setRecLoading(false)
   }
 
-  const images = [
-    { id: "1", src: "https://i.gadgets360cdn.com/large/big-billion-days-2022-sale_1663819658737.png", alt: "Image 1" },
-    { id: "2", src: "https://www.india.com/wp-content/uploads/2020/09/flipkart-big-billion-sale.jpg", alt: "Image 2" },
-    { id: "3", src: "https://images.hindustantimes.com/tech/img/2020/10/16/1600x900/big_billion_flipkart_1602482242435_1602482253964_1602815395568.png", alt: "Image 3" },
-    { id: "4", src: "https://trak.in/wp-content/uploads/2020/10/IMG_20201015_102047-1024x573.jpg", alt: "Image 4" },
-  ];
-
-
   return (
     <div className='m-2 p-3 pb-10'>
       <Head>
@@ -74,7 +66,7 @@ const Home: NextPage = () => {
               <SyncLoader color="rgb(14 165 233)" size={20} />
               <div className='items-center flex space-x-2 m-3 bg-neutral-200 p-2 px-10 rounded-xl mt-4'>
                 <h1 className='animate-spin'>.</h1>
-                <h1 className='font-semibold '>{fetchMessage}</h1>
+                <h1 className='font-semibold'>{fetchMessage}</h1>
               </div>
             </div>
             :
@@ -97,7 +89,7 @@ const Home: NextPage = () => {
               {
                   personalisedProducts?.slice(0,4).map((item:any) => (
                     <div className='flex justify-center items-center border-2 rounded-xl p-2'>
-                        <img className="h-40 max-w-full rounded-lg" src={item.images![0]} alt="" />
+                        <img className="h-40 max-w-full rounded-lg" src={item?.image} alt="" />
                     </div>
                   ))
                 }
@@ -112,7 +104,7 @@ const Home: NextPage = () => {
               {
                   topProducts?.slice(0,4).map((item:any) => (
                     <div className='flex justify-center items-center border-2 rounded-xl p-2'>
-                        <img className="h-40 max-w-full rounded-lg" src={item.images![0]} alt="" />
+                        <img className="h-40 max-w-full rounded-lg" src={item?.image} alt="" />
                     </div>
                   ))
                 }
@@ -127,7 +119,7 @@ const Home: NextPage = () => {
               {
                   similarProducts?.slice(0,4).map((item:any) => (
                     <div className='flex justify-center items-center border-2 rounded-xl p-2'>
-                        <img className="h-40 max-w-full rounded-lg" src={item.images![0]} alt="" />
+                        <img className="h-40 max-w-full rounded-lg" src={item?.image} alt="" />
                     </div>
                   ))
                 }
