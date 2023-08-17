@@ -11,10 +11,6 @@ function Product({image, name, description, rating, price, stock, productId}: an
     const router = useRouter();
     const {user: userId, cartData, setCartData}: any = useContext(ProductRecommendationContext);
 
-    console.log(cartData);
-    console.log("product id")
-    console.log(productId);
-
     const isProductInCart = cartData.some((item:any) => item.product_id === productId);
 
     const [inCart, setInCart] = useState(isProductInCart);

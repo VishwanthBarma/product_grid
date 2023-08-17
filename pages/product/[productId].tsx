@@ -1,9 +1,40 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { BsCurrencyRupee } from 'react-icons/bs';
+import { ProductRecommendationContext } from '../../Context/ProductRecommendationContext';
 
 function ProductPage({product}: any) {
+
+  const {user: userId, cartData, setCartData}: any = useContext(ProductRecommendationContext);
+
+  const isProductInCart = cartData.some((item:any) => item.product_id === productId);
+
+  const [inCart, setInCart] = useState(isProductInCart);
+
+  console.log(product)
+
+  const productId = product.id;
+
+  const addToCart = async () => {
+    try {
+      const response = await axios.post('/api/add-to-cart', {
+        userId: userId,
+        productId: productId,
+      });
+
+      if (response.data.success) {
+        console.log('Product added to cart successfully');
+        setInCart(true);
+
+        const cartDataFetch = await axios.get(`http://127.0.0.1:5000/api/get-cart/${userId}`)
+        setCartData(cartDataFetch.data);
+
+      }
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    }
+  };
 
   return (
     <div className="flex p-6">
@@ -48,9 +79,15 @@ function ProductPage({product}: any) {
         <p className="text-gray-600 text-sm">{product.return_policy}</p>
         
         <div className='flex space-x-4 mt-4'>
-            <button className="bg-sky-500 font-semibold text-white px-6 py-3 rounded-xl shadow-md hover:bg-sky-600">
-            Add to Cart
-            </button>
+            {
+                !inCart ?
+
+                <button onClick={() => addToCart()} className='bg-sky-500 p-2 rounded-xl px-5 font-sembold text-white hover:bg-sky-400 active:bg-sky-600'>
+                    <h1 className='font-bold'>ADD TO CART</h1>
+                </button>
+                :
+                <h1 className='font-bold border-2 border-sky-500 p-2 rounded-xl flex-1 font-sembold text-neutral-700 text-center'>PRODUCT IN CART</h1>
+            }
             <button className='p-3 bg-neutral-100 rounded-xl border-2 hover:bg-neutral-200'>Add to Wishlist</button>
         </div>
         <div className="mt-6">
