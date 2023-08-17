@@ -36,7 +36,7 @@ function Product({image, name, description, rating, price, stock, productId}: an
       };
     
   return (
-    <div className='bg-neutral-100 p-3 rounded-xl flex flex-col space-y-1 hover:shadow-lg justify-center h-max'>
+    <div className='bg-neutral-100 p-3 rounded-xl flex flex-col space-y-1 hover:shadow-lg justify-center h-96'>
         <div onClick={() => router.push(`/product/${productId}`)} className='flex flex-col space-y-1  cursor-pointer'>
             <div className='flex justify-center items-center rounded-xl'>
                 <img className="h-40 max-w-full rounded-xl" src={ image } alt="" />

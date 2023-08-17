@@ -27,7 +27,7 @@ function SlideShow() {
           >
             <img
               src={`/carousel/carousel-${index + 1}.png`}
-              className="absolute block w-full h-full"
+              className="absolute block w-full h-full object-cover"
               alt={`Slide ${index + 1}`}
             />
           </div>
