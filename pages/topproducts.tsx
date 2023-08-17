@@ -15,7 +15,7 @@ function TopProducts() {
           {
             topProducts?.map((product: any) => (<Product
               key={product?.id}
-               image={product?.images[0]}
+               image={product?.image}
                rating={product?.avg_rating}  
                name={product?.name}
                description={product?.description}
