@@ -3246,7 +3246,7 @@ user_id,product_id,liked_or_not,wishlisted_or_not,ordered_or_not,search_count
 43,171,0,0,0,6
 96,931,1,0,0,4
 84,2769,0,1,0,2
-1,1511,1,0,0,10
+1,1511,1,0,1,10
 80,248,1,0,0,4
 62,1508,0,1,0,0
 21,2253,0,1,0,0
@@ -4377,7 +4377,7 @@ user_id,product_id,liked_or_not,wishlisted_or_not,ordered_or_not,search_count
 8,2792,0,0,0,6
 83,381,1,0,0,9
 56,1500,0,0,0,4
-1,411,1,0,0,10
+1,411,1,0,1,10
 60,894,1,0,1,10
 21,247,0,0,0,6
 66,1300,0,1,0,9
@@ -5002,3 +5002,4 @@ user_id,product_id,liked_or_not,wishlisted_or_not,ordered_or_not,search_count
 1,23,0,0,1,0
 1,12,0,0,1,0
 1,15,0,0,1,0
+1,287,0,0,1,0
