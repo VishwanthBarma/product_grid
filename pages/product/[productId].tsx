@@ -61,7 +61,7 @@ function ProductPage({product}: any) {
 
         <div className='mt-5 w-2/4'>
             <h1 className='font-semibold text-xl mb-1 text-neutral-600'>Specifications</h1>
-            <h1>{product.formatted_specifications}</h1>
+            <h1>{product.specifications}</h1>
         </div>
     </div>
     </div>
