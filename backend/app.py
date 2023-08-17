@@ -28,6 +28,8 @@ def get_product_details(product_id):
     products_df = pd.read_csv(products_csv_path)
     product_info = products_df[products_df['product_id'] == product_id].iloc[0]
 
+    discount_percent = f"{product_info['discount']}% off"
+    reviews_count_str = str(product_info['reviews_count'])
 
     product_details = {
         'id': product_id,
@@ -37,15 +39,15 @@ def get_product_details(product_id):
         'f_assured': bool(product_info['f_assured']),
         'price': product_info['price'],
         'original_price': product_info['original_price'],
-        'discount': product_info['discount'],
+        'discount': discount_percent,
         'image': product_info['images'],
         'seller': product_info['seller'],
         'seller_rating': product_info['seller_rating'],
         'return_policy': product_info['return_policy'],
         'description': product_info['description'],
         'specifications': product_info['specifications'],
-        'avg_rating': round(product_info['avg_rating'], 2),
-        'reviews_count': product_info['reviews_count'],
+        'avg_rating': product_info['avg_rating'],
+        'reviews_count': round(product_info['avg_rating'], 2),
         'category': product_info['category'],
         'sub_category': product_info['sub_category']
     }
