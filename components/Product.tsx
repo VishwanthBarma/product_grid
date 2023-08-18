@@ -66,6 +66,36 @@ function Product({image, name, description, rating, price, stock, productId, ori
             console.error('Error adding product to wishlist:', error);
           }
     }
+
+    const removeFromWishlist = async() => {
+        try {
+            const response = await axios.post('/api/remove-from-wishlist', {
+              userId: userId,
+              productId: productId,
+            });
+      
+            if (response.data.success) {
+              console.log('Product removed from wishlist successfully');
+              setInWishlist(false);
+  
+              const wishlistDataFetch = await axios.get(`http://127.0.0.1:5000/api/get-wishlist/${userId}`)
+              setWishlistData(wishlistDataFetch.data);
+            }
+
+            const updateRelation = await axios.post('http://127.0.0.1:5000/api/update-wishlist-status-negative', {
+                user_id: userId,
+                product_id: productId,
+            })
+
+            if(updateRelation.data.success){
+                console.log("Updated userProductRelationDB for wishilisted item.")
+            }
+
+
+          }catch (error) {
+            console.error('Error adding product to wishlist:', error);
+        }
+    }
     
   return (
     <div className='bg-white p-3 rounded-xl flex flex-col space-y-1 hover:shadow-lg justify-center h-96'>
@@ -112,7 +142,7 @@ function Product({image, name, description, rating, price, stock, productId, ori
                 </button>
                 :
 
-                <button className='bg-white p-2 rounded-xl flex font-sembold border-2 hover:bg-white' disabled>
+                <button onClick={() => removeFromWishlist()} className='bg-white p-2 rounded-xl flex font-sembold border-2 hover:bg-neutral-100'>
                     <AiFillHeart className='text-pink-500 text-2xl'/>
                 </button>
 
