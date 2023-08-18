@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 
 type contextState = {
@@ -10,6 +11,8 @@ type contextState = {
     topProducts: [] | null;
     similarProducts: [] | null;
     cartData: [] | null;
+    wishlistData: [] | null;
+    products: [] | null;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
     setUser: React.Dispatch<React.SetStateAction<number | null>>;
     setPersonalisedProducts: React.Dispatch<React.SetStateAction<[] | null>>;
@@ -18,6 +21,8 @@ type contextState = {
     setUserName: React.Dispatch<React.SetStateAction<string | null>>;
     setUserImage: React.Dispatch<React.SetStateAction<string | null>>;
     setCartData: React.Dispatch<React.SetStateAction<[] | null>>;
+    setWishlistData: React.Dispatch<React.SetStateAction<[] | null>>;
+    setProducts: React.Dispatch<React.SetStateAction<[] | null>>;
 }
 
 export const ProductRecommendationContext = createContext<contextState | null>(null);
@@ -32,6 +37,21 @@ export const ProductRecommendationProvider = ({children}: any) => {
     const [topProducts, setTopProducts] = useState<[]| null>(null);
     const [similarProducts, setSimilarProducts] = useState<[]| null>(null);
     const [cartData, setCartData] = useState<[] | null>(null);
+    const [wishlistData, setWishlistData] = useState<[] | null>(null);
+    const [products, setProducts] = useState<[]|null>(null);
+
+    useEffect(() => {
+        const fetchProducts = async() => {
+            try{
+                const response = await axios.get('http://127.0.0.1:5000/api/all-product-details');
+                const products = response.data;
+                setProducts(products);
+            }catch (error){
+                console.log(error);
+            }
+        }
+        fetchProducts();
+    }, []);
 
     return (
         <ProductRecommendationContext.Provider value= {{
@@ -44,7 +64,11 @@ export const ProductRecommendationProvider = ({children}: any) => {
             userName,
             userImage,
             cartData,
+            wishlistData,
+            products,
+            setProducts,
             setCartData,
+            setWishlistData,
             setLoading,
             setUser,
             setPersonalisedProducts,

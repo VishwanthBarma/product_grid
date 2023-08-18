@@ -34,12 +34,12 @@ function User({user, usersData}: any) {
             <h1>{user?.user_email}</h1>
             <h1>{user?.user_mobile}</h1>
         </div>
-        <div className='w-1/2 h-[900px] bg-neutral-100 rounded-xl p-5 space-y-3 overflow-y-scroll'>
+        <div className='w-1/2 h-[900px] bg-white rounded-xl p-5 space-y-3 overflow-y-scroll'>
             <h1 className='font-bold text-xl text-neutral-700 text-center'>Registered Users</h1>
             <div className='flex flex-wrap'>
               {
                 usersData?.map((person:any) => ( person.user_id != user.user_id &&
-                  <button onClick={() => changeUser(person)} className='font-semibold bg-neutral-200 p-2 w-fit rounded-xl m-2 hover:text-neutral-300 hover:bg-neutral-700 active:bg-black'>{person?.user_name}</button>
+                  <button onClick={() => changeUser(person)} className='font-semibold bg-neutral-200/70 p-2 w-fit rounded-xl m-2 hover:text-neutral-300 hover:bg-neutral-700 active:bg-black'>{person?.user_name}</button>
                 ))
               }
             </div>

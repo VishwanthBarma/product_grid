@@ -12,10 +12,10 @@ function CartProduct({image, name, price, stock}: any) {
             <h1 className='font-bold text-xl flex items-center'><BsCurrencyRupee />{price}</h1>
             <h1 className='text-green-700 text-sm'>{stock}</h1>
         </div>
-        <div className='w-1/5 bg-neutral-200 rounded-xl flex flex-col p-3 space-y-1 items-start'>
+        <div className='w-1/5 bg-neutral-100 rounded-xl flex flex-col p-3 space-y-1 items-start'>
             <div className='flex flex-col mb-3'>
                 <h1 className='font-semibold mb-1'>Quantity</h1>
-                <div className='flex space-x-3 bg-neutral-100 justify-between p-1 px-3 items-center rounded-xl'>
+                <div className='flex space-x-3 bg-white justify-between p-1 px-3 items-center rounded-xl'>
                     <button className='text-sky-500 text-xl'>+</button>
                     <h1>0</h1>
                     <button className='text-rose-500 text-xl'>-</button>
