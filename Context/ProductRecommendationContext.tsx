@@ -10,6 +10,7 @@ type contextState = {
     topProducts: [] | null;
     similarProducts: [] | null;
     cartData: [] | null;
+    wishlistData: [] | null;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
     setUser: React.Dispatch<React.SetStateAction<number | null>>;
     setPersonalisedProducts: React.Dispatch<React.SetStateAction<[] | null>>;
@@ -18,6 +19,7 @@ type contextState = {
     setUserName: React.Dispatch<React.SetStateAction<string | null>>;
     setUserImage: React.Dispatch<React.SetStateAction<string | null>>;
     setCartData: React.Dispatch<React.SetStateAction<[] | null>>;
+    setWishlistData: React.Dispatch<React.SetStateAction<[] | null>>;
 }
 
 export const ProductRecommendationContext = createContext<contextState | null>(null);
@@ -32,6 +34,7 @@ export const ProductRecommendationProvider = ({children}: any) => {
     const [topProducts, setTopProducts] = useState<[]| null>(null);
     const [similarProducts, setSimilarProducts] = useState<[]| null>(null);
     const [cartData, setCartData] = useState<[] | null>(null);
+    const [wishlistData, setWishlistData] = useState<[] | null>(null);
 
     return (
         <ProductRecommendationContext.Provider value= {{
@@ -44,7 +47,9 @@ export const ProductRecommendationProvider = ({children}: any) => {
             userName,
             userImage,
             cartData,
+            wishlistData,
             setCartData,
+            setWishlistData,
             setLoading,
             setUser,
             setPersonalisedProducts,

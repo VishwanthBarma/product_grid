@@ -97,6 +97,8 @@ function PersonalisedProducts() {
                     price={product?.price}
                     stock={product?.stock}
                     productId = {product?.id}
+                    original_price = {product?.original_price}
+                    discount = {product?.discount}
                         />))
                     :
                     <div className='bg-white p-5 rounded-xl'>

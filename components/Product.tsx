@@ -2,18 +2,20 @@ import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react'
 import { AiFillStar } from "react-icons/ai";
 import { BsCurrencyRupee } from "react-icons/bs";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { ProductRecommendationContext } from '../Context/ProductRecommendationContext';
 import axios from 'axios';
 
 
-function Product({image, name, description, rating, price, stock, productId}: any) {
+function Product({image, name, description, rating, price, stock, productId, original_price, discount}: any) {
     const router = useRouter();
-    const {user: userId, cartData, setCartData}: any = useContext(ProductRecommendationContext);
+    const {user: userId, cartData, setCartData, wishlistData, setWishlistData}: any = useContext(ProductRecommendationContext);
 
-    const isProductInCart = cartData.some((item:any) => item.product_id === productId);
+    const isProductInCart = cartData?.some((item:any) => item.product_id === productId);
+    const isProductInWishlist = wishlistData?.some((item:any) => item.product_id === productId);
 
     const [inCart, setInCart] = useState(isProductInCart);
+    const [inWishlist, setInWishlist] = useState(isProductInWishlist)
 
     const addToCart = async () => {
         try {
@@ -34,6 +36,36 @@ function Product({image, name, description, rating, price, stock, productId}: an
           console.error('Error adding product to cart:', error);
         }
       };
+
+    const addToWishlist = async() => {
+        try {
+            const response = await axios.post('/api/add-to-wishlist', {
+              userId: userId,
+              productId: productId,
+            });
+      
+            if (response.data.success) {
+              console.log('Product added to wishlist successfully');
+              setInWishlist(true);
+  
+              const wishlistDataFetch = await axios.get(`http://127.0.0.1:5000/api/get-wishlist/${userId}`)
+              setWishlistData(wishlistDataFetch.data);
+            }
+
+            const updateRelation = await axios.post('http://127.0.0.1:5000/api/update-wishlist-status', {
+                user_id: userId,
+                product_id: productId,
+            })
+
+            if(updateRelation.data.success){
+                console.log("Updated userProductRelationDB for wishilisted item.")
+            }
+
+
+          } catch (error) {
+            console.error('Error adding product to wishlist:', error);
+          }
+    }
     
   return (
     <div className='bg-white p-3 rounded-xl flex flex-col space-y-1 hover:shadow-lg justify-center h-96'>
@@ -48,10 +80,17 @@ function Product({image, name, description, rating, price, stock, productId}: an
             <h1>{ rating.toFixed(2) }</h1>
             <AiFillStar/>
         </div>
-        <h1 className='flex items-center font-semibold text-lg'>
-            <BsCurrencyRupee/>
-            { price }
-        </h1>
+
+        <div className='flex items-center'>
+            <h1 className='flex items-center font-semibold text-lg'>
+                <BsCurrencyRupee/>
+                { price }
+            </h1>
+            <span className="text-gray-400 ml-2 line-through flex items-center text-sm">
+                <BsCurrencyRupee/>
+                {original_price}</span>
+            <span className="font-semibold text-green-700 ml-2 text-sm">{discount}% off</span>
+        </div>
         <h1 className='text-sm text-red-600'>{ stock }</h1>
         <div className='flex justify-between space-x-2'>
             {
@@ -63,9 +102,21 @@ function Product({image, name, description, rating, price, stock, productId}: an
                 :
                 <h1 className='font-bold border-2 border-sky-500 p-2 rounded-xl flex-1 font-sembold text-neutral-700 text-center'>PRODUCT IN CART</h1>
             }
-            <button className='bg-white p-2 rounded-xl fle font-sembold text-white active:bg-sky-600 hover:bg-neutral-600'>
-                <AiOutlineHeart className='text-pink-500 text-2xl'/>
-            </button>
+
+
+            {
+                !inWishlist ?
+
+                <button onClick={() => addToWishlist()} className='bg-neutral-100 p-2 rounded-xl flex font-sembold active:bg-sky-600 border-2 hover:bg-white'>
+                    <AiOutlineHeart className='text-pink-500 text-2xl'/>
+                </button>
+                :
+
+                <button className='bg-white p-2 rounded-xl flex font-sembold border-2 hover:bg-white' disabled>
+                    <AiFillHeart className='text-pink-500 text-2xl'/>
+                </button>
+
+            }
         </div>
     </div>
   )

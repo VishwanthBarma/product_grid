@@ -21,6 +21,7 @@ const Home: NextPage = () => {
           setSimilarProducts,
           cartData,
           setCartData,
+          setWishlistData,
           userName
           }: any = useContext(ProductRecommendationContext);
 
@@ -43,6 +44,9 @@ const Home: NextPage = () => {
 
       const cartDataFetch = await axios.get(`http://127.0.0.1:5000/api/get-cart/${userId}`)
       setCartData(cartDataFetch.data);
+
+      const wishlistDataFetch = await axios.get(`http://127.0.0.1:5000/api/get-wishlist/${userId}`)
+      setWishlistData(wishlistDataFetch.data);
 
 
     } catch (error) {

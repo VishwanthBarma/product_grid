@@ -20,6 +20,8 @@ function SimilaruserProducts() {
                price={product?.price}
                stock={product?.stock}
                productId = {product?.id}
+               original_price = {product?.original_price}
+               discount = {product?.discount}
                 />))
           }
 
