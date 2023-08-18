@@ -13,8 +13,6 @@ products_csv_path = 'gridDB/productsDB.csv'
 cart_csv_path = 'gridDB/cartDB.csv'
 user_db_path = 'gridDB/usersDB.csv'
 
-
-
 @app.route('/api/update-order-status', methods=['POST'])
 def update_order_status():
     try:
@@ -222,42 +220,6 @@ def get_similar_products(user_id):
             recommended_products.append(recommended_product)
     # return jsonify(recommended_products), 200, {'Content-Type': 'application/json'}
     return jsonify(recommended_products)
-
-@app.route('/api/update-order-status', methods=['POST'])
-def update_order_status():
-    try:
-        relation_csv_path = 'gridDB/userProductRelation.csv'
-        relation_df = pd.read_csv(relation_csv_path)
-        cart_csv_path = 'gridDB/cartDB.csv'
-        cart_df = pd.read_csv(cart_csv_path)
-        data = request.get_json()
-        user_id = data.get('user_id')
-        product_ids = data.get('product_ids')
-        if user_id is None or product_ids is None:
-            return jsonify({'error': 'Missing user_id or product_ids in the request'}), 400
-        updated_rows = []
-        for product_id in product_ids:
-            matching_rows = relation_df[(relation_df['user_id'] == user_id) & (relation_df['product_id'] == product_id)]
-            if not matching_rows.empty:
-                relation_df.loc[matching_rows.index, 'ordered_or_not'] = 1
-                updated_rows.extend(matching_rows.index.tolist())
-            else:
-                new_row = {
-                    'user_id': user_id,
-                    'product_id': product_id,
-                    'liked_or_not': None,
-                    'wishlisted_or_not': None,
-                    'ordered_or_not': 1,
-                    'search_count': None
-                }
-                relation_df = relation_df.append(new_row, ignore_index=True)
-                updated_rows.append(len(relation_df) - 1)
-        relation_df.to_csv(relation_csv_path, index=False)
-        cart_df = cart_df[~((cart_df['userId'] == user_id) & (cart_df['productIds'].isin(product_ids)))]
-        cart_df.to_csv(cart_csv_path, index=False)
-        return jsonify({'message': 'Order status updated successfully and cart items deleted'}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
