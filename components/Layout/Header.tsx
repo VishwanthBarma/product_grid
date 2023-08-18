@@ -6,6 +6,7 @@ import { BiSearchAlt } from "react-icons/bi";
 import { ProductRecommendationContext } from "../../Context/ProductRecommendationContext";
 import Link from "next/link";
 import { HiMenu } from "react-icons/hi";
+import SearchBar from "../SearchBar";
 
 export default function Header(){
     const router = useRouter();
@@ -26,13 +27,8 @@ export default function Header(){
                 <h1 className="font-bold text-xl">LOGO</h1>
             </Link>
 
-            <div className="w-1/2 rounded-xl bg-neutral-100 flex justify-between items-center">
-                <input className="p-2 py-3 w-full rounded-xl bg-neutral-100 font-semibold outline-none" placeholder="Search Products"></input>
-                {/* Search Function: onClick */}
-                <div className="mr-4 font-bold text-neutral-800 hover:text-2xl cursor-pointer text-xl">
-                    <BiSearchAlt />
-                </div>
-            </div>
+
+            <SearchBar />
 
 
             <Link href={`/cart/${userId}`} className={`${isCartPage && 'text-sky-500'} flex relative items-center space-x-1 cursor-pointer`}>

@@ -165,7 +165,16 @@ def get_all_user_details():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/all-product-details', methods=['GET'])
+def get_all_product_details():
+    try:
+        product_data = pd.read_csv(products_csv_path)
+        product_list = product_data.to_dict(orient='records')
+        return product_list
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
+# Particular Product
 @app.route('/api/product-details/<int:product_id>', methods=['GET'])
 def get_product_details(product_id):
     products_df = pd.read_csv(products_csv_path)
