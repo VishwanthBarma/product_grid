@@ -2,11 +2,13 @@ import pandas as pd
 import numpy as np
 import os
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.decomposition import TruncatedSVD
+
 
 user_product_csv_path = os.path.join(os.getcwd(), 'gridDB', 'userProductRelation.csv')
 products_csv_path = os.path.join(os.getcwd(), 'gridDB', 'productsDB.csv')
 
-def FinalRecommendationWithSVD(user_id, num_recommendations, num_components=50):
+def FinalRecommendation(user_id, num_recommendations, num_components=50):
     user_product_df = pd.read_csv(user_product_csv_path)
     products_df = pd.read_csv(products_csv_path) 
     merged_df = user_product_df.merge(products_df, on='product_id', how='left')
@@ -28,4 +30,3 @@ def FinalRecommendationWithSVD(user_id, num_recommendations, num_components=50):
             product_scores[product_id] = score
     sorted_recommendations = sorted(product_scores.keys(), key=lambda x: product_scores[x], reverse=True)
     return sorted_recommendations[:num_recommendations]
-recommended_products_svd = FinalRecommendationWithSVD(59, 12)
