@@ -4,6 +4,7 @@ from algo.FinalRecommendation import FinalRecommendation
 from algo.TopRecommendation import top_n_products
 from algo.SimilarRecommendation import similarRecommendations
 import pandas as pd
+import csv
 
 app = Flask(__name__)
 CORS(app)
@@ -13,6 +14,39 @@ products_csv_path = 'gridDB/productsDB.csv'
 cart_csv_path = 'gridDB/cartDB.csv'
 user_db_path = 'gridDB/usersDB.csv'
 wishlist_csv_path = 'gridDB/wishlistDB.csv'
+
+
+@app.route('/api/register-new-user', methods=['POST'])
+def register_new_user():
+    try:
+        user_data = request.get_json()
+
+        # Append the new user to userDB.csv
+        with open('userDB.csv', 'a', newline='') as csvfile:
+            fieldnames = ['user_id', 'user_name', 'user_email', 'user_mobile', 'user_image']  # Add other fieldnames
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writerow(user_data)
+
+        return jsonify({'message': 'User added successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/get-last-user-id', methods=['GET'])
+def get_last_user_id():
+    try:
+        with open('gridDB/usersDB.csv', 'r') as csvfile:
+            reader = csv.DictReader(csvfile)
+            last_user = None
+            for row in reader:
+                last_user = row
+            if last_user:
+                last_user_id = int(last_user['user_id'])
+                return jsonify({'lastUserId': last_user_id})
+            else:
+                return jsonify({'lastUserId': 0})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 @app.route('/api/update-search-count', methods=['POST'])
