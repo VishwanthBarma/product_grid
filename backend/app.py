@@ -120,8 +120,6 @@ def update_wishlist_status():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
-
 @app.route('/api/update-order-status', methods=['POST'])
 def update_order_status():
     try:
