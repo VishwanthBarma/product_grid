@@ -17,8 +17,9 @@ function User({user, usersData}: any) {
 
   const [newUserName, setNewUserName] = useState("");
   const [newUserEmail, setNewUserEmail] = useState("example@gmail.com")
-  const [newUserPhone, setNewUserPhone] = useState("+91 xx-56-xx2789")
+  const [newUserPhone, setNewUserPhone] = useState("+91-xx-56-xx2789")
   const [newUserImage, setNewUserImage] = useState("https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png")
+  const [isUserAdded, setIsUserAdded] = useState(false);
 
   const router = useRouter();
 
@@ -51,6 +52,7 @@ function User({user, usersData}: any) {
   
       if(newUserResponse.data.success){
         console.log("New user registered successfully.")
+        setIsUserAdded(true);
       }
     }catch(error){
       console.log("Error:", error);
@@ -90,9 +92,13 @@ function User({user, usersData}: any) {
                   <input value={newUserImage} onChange={(e) => setNewUserImage(e.target.value)} className='ml-5 p-2 rounded-xl bg-neutral-100'></input>
                 </label>
 
-                <button type='submit' className='bg-sky-500 hover:bg-sky-400 active:bg-sky-600 text-white font-bold my-5 p-1 rounded-xl'>Create User</button>
+                <button type='submit' className='bg-sky-500 hover:bg-sky-400 active:bg-sky-600 text-white font-bold my-5 p-2 rounded-xl'>Create User</button>
 
               </form>
+              {
+                isUserAdded && 
+                <h1 className='font-semibold text-green-500 border-2 p-1 rounded-xl text-center mt-3'>New User Registered Successfully</h1>
+              }
           </div>
 
         </div>

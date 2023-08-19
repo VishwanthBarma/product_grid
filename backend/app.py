@@ -21,8 +21,10 @@ def register_new_user():
     try:
         user_data = request.get_json()
 
+        print(user_data)
+        
         # Append the new user to userDB.csv
-        with open('userDB.csv', 'a', newline='') as csvfile:
+        with open('/gridDB/usersDB.csv', 'a', newline='') as csvfile:
             fieldnames = ['user_id', 'user_name', 'user_email', 'user_mobile', 'user_image']  # Add other fieldnames
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow(user_data)
