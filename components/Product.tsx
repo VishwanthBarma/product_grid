@@ -96,10 +96,26 @@ function Product({image, name, description, rating, price, stock, productId, ori
             console.error('Error adding product to wishlist:', error);
         }
     }
+
+    const handleProductClick = async() => {
+        const pathName = router.pathname
+        if(pathName == "/search/category/search" || pathName == "/search/products/search"){
+            const updateSearchCount = await axios.post('http://127.0.0.1:5000/api/update-search-count', {
+                user_id: userId,
+                product_id: productId,
+            })
+
+            if(updateSearchCount.data.success){
+                console.log("Updated Search Count for the product")
+            }
+        }
+
+        router.push(`/product/${productId}`);
+    }
     
   return (
     <div className='bg-white p-3 rounded-xl flex flex-col space-y-1 hover:shadow-lg justify-center h-96'>
-        <div onClick={() => router.push(`/product/${productId}`)} className='flex flex-col space-y-1  cursor-pointer'>
+        <div onClick={() => handleProductClick()} className='flex flex-col space-y-1  cursor-pointer'>
             <div className='flex justify-center items-center rounded-xl'>
                 <img className="h-40 max-w-full rounded-xl" src={ image } alt="" />
             </div>

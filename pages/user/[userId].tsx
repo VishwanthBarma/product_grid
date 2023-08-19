@@ -12,6 +12,7 @@ function User({user, usersData}: any) {
      userName, 
      userImage,
      setUserImage,
+     setCartData,
      setSimilarProducts}: any = useContext(ProductRecommendationContext)
 
   const router = useRouter();
@@ -23,6 +24,7 @@ function User({user, usersData}: any) {
     setSimilarProducts(null);
     setUserName(person?.user_name);
     setUserImage(person?.user_image);
+    setCartData([]);
     router.push('/');
   }
 

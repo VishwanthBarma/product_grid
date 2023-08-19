@@ -64,7 +64,7 @@ function cart({cartData}: any) {
                 cartData.map((product:any) => <CartProduct image={product.images} name={product.product_name} price={product.price} stock={product.stock} />)
                 :
                 <>
-                    <h1 className='font-semibold text-center bg-neutral-2100 p-2 rounded-xl'>No Products In Cart</h1>
+                    <h1 className='font-semibold text-center bg-neutral-100 p-2 rounded-xl'>No Products In Cart</h1>
                     <button onClick={() => router.push("/personalisedproducts")} className='font-bold mt-2 text-sky-500 hover:text-sky-600 active:text-sky-400'>Continue Shopping</button>
                 </>
             }

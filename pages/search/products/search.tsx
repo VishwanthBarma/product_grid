@@ -7,8 +7,6 @@ const SearchProductsPage = () => {
     const { products }: any = useContext(ProductRecommendationContext);
     const router = useRouter();
 
-    console.log(products);
-
     // Get the search query parameter from the URL
     const { query }:any = router.query;
 

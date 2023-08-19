@@ -15,6 +15,42 @@ user_db_path = 'gridDB/usersDB.csv'
 wishlist_csv_path = 'gridDB/wishlistDB.csv'
 
 
+@app.route('/api/update-search-count', methods=['POST'])
+def update_search_count():
+    try:
+        relation_csv_path = 'gridDB/userProductRelation.csv'
+        relation_df = pd.read_csv(relation_csv_path)
+        data = request.get_json()
+        user_id = data.get('user_id')
+        product_id = data.get('product_id')
+        
+        if user_id is None or product_id is None:
+            return jsonify({'error': 'Missing user_id or product_id in the request'}), 400
+
+        updated_rows = []
+
+        matching_rows = relation_df[(relation_df['user_id'] == user_id) & (relation_df['product_id'] == product_id)]
+        if not matching_rows.empty:
+            relation_df.loc[matching_rows.index, 'search_count'] += 1
+            updated_rows.extend(matching_rows.index.tolist())
+        else:
+            new_row = {
+                'user_id': user_id,
+                'product_id': product_id,
+                'liked_or_not': 0,
+                'wishlisted_or_not': 0,
+                'ordered_or_not': 0,
+                'search_count': 1
+            }
+            relation_df = relation_df.append(new_row, ignore_index=True)
+            updated_rows.append(len(relation_df) - 1)
+
+        relation_df.to_csv(relation_csv_path, index=False)
+        return jsonify({'message': 'Search count status updated successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 @app.route('/api/update-wishlist-status-negative', methods=['POST'])
 def update_wishlist_status_negative():
     try:
@@ -36,10 +72,10 @@ def update_wishlist_status_negative():
             new_row = {
                 'user_id': user_id,
                 'product_id': product_id,
-                'liked_or_not': None,
+                'liked_or_not': 0,
                 'wishlisted_or_not': 0,
-                'ordered_or_not': None,
-                'search_count': None
+                'ordered_or_not': 0,
+                'search_count': 0
             }
             relation_df = relation_df.append(new_row, ignore_index=True)
             updated_rows.append(len(relation_df) - 1)
@@ -71,10 +107,10 @@ def update_wishlist_status():
             new_row = {
                 'user_id': user_id,
                 'product_id': product_id,
-                'liked_or_not': None,
+                'liked_or_not': 0,
                 'wishlisted_or_not': 1,
-                'ordered_or_not': None,
-                'search_count': None
+                'ordered_or_not': 0,
+                'search_count': 0
             }
             relation_df = relation_df.append(new_row, ignore_index=True)
             updated_rows.append(len(relation_df) - 1)
@@ -108,10 +144,10 @@ def update_order_status():
                 new_row = {
                     'user_id': user_id,
                     'product_id': product_id,
-                    'liked_or_not': None,
-                    'wishlisted_or_not': None,
+                    'liked_or_not': 0,
+                    'wishlisted_or_not': 0,
                     'ordered_or_not': 1,
-                    'search_count': None
+                    'search_count': 0
                 }
                 relation_df = relation_df.append(new_row, ignore_index=True)
                 updated_rows.append(len(relation_df) - 1)
