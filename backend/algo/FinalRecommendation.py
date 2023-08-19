@@ -14,6 +14,9 @@ def FinalRecommendation(user_id, num_recommendations, num_components=50):
     merged_df = user_product_df.merge(products_df, on='product_id', how='left')
     interaction_matrix = pd.pivot_table(merged_df, values=['liked_or_not', 'wishlisted_or_not', 'ordered_or_not', 'search_count'],
                                     index='user_id', columns='product_id', fill_value=0)
+    if user_id not in interaction_matrix.index:
+        print(f"User with ID {user_id} has no interactions recorded.")
+        return []  # Return an empty list of recommendations
     svd = TruncatedSVD(n_components=num_components, random_state=42)
     interaction_matrix_svd = svd.fit_transform(interaction_matrix)
     item_similarity_svd = cosine_similarity(interaction_matrix_svd.T)

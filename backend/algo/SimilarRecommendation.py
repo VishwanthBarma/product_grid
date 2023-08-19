@@ -32,7 +32,9 @@ def similarRecommendations(user_index, num_recommendations):
     final_rating = final_rating.sort_values(by='avg_rating', ascending=False)
     final_ratings_matrix['user_index'] = np.arange(0, final_ratings_matrix.shape[0])
     final_ratings_matrix.set_index(['user_index'], inplace=True)
-    
+    if user_index not in final_ratings_matrix.index:
+        popular_products = final_rating.index[:num_recommendations]
+        return popular_products
     most_similar_users = similar_users(user_index, final_ratings_matrix)[0]
     prod_ids = set(list(final_ratings_matrix.columns[np.where(final_ratings_matrix.loc[user_index] > 0)]))
     recommendations = []
@@ -44,4 +46,8 @@ def similarRecommendations(user_index, num_recommendations):
             observed_interactions = observed_interactions.union(similar_user_prod_ids)
         else:
             break
+    if len(recommendations) < num_recommendations:
+        remaining_recommendations = num_recommendations - len(recommendations)
+        popular_products = final_rating.index[:remaining_recommendations]
+        recommendations.extend(popular_products)
     return recommendations[:num_recommendations]
