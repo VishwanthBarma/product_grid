@@ -20,16 +20,21 @@ wishlist_csv_path = 'gridDB/wishlistDB.csv'
 def register_new_user():
     try:
         user_data = request.get_json()
+        if not all(key in user_data for key in ['user_id', 'user_name', 'user_email', 'user_mobile', 'user_image']):
+            return jsonify({'error': 'Invalid user data'}), 400
 
-        print(user_data)
-        
-        # Append the new user to userDB.csv
-        with open('/gridDB/usersDB.csv', 'a', newline='') as csvfile:
-            fieldnames = ['user_id', 'user_name', 'user_email', 'user_mobile', 'user_image']  # Add other fieldnames
+        with open('gridDB/usersDB.csv', 'r') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if row['user_id'] == user_data['user_id']:
+                    return jsonify({'error': 'User ID already exists'}), 400
+
+        with open('gridDB/usersDB.csv', 'a', newline='') as csvfile:
+            fieldnames = ['user_id', 'user_name', 'user_email', 'user_mobile', 'user_image']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow(user_data)
 
-        return jsonify({'message': 'User added successfully'}), 200
+        return jsonify({'message': 'User added successfully'}), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

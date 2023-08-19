@@ -5011,3 +5011,5 @@ user_id,product_id,liked_or_not,wishlisted_or_not,ordered_or_not,search_count
 1,2071,0,0,0,0
 1,1,0,0,0,1
 1,120,0,0,0,2
+1,902,0,1,1,0
+1,1948,0,0,1,0
