@@ -78,7 +78,7 @@ function SearchBar() {
                 type="text"
                 value={searchTerm}
                 onChange={handleSearch}
-                placeholder="Search for products..."
+                placeholder="More to explore..."
                 className="w-full rounded-xl bg-neutral-100 p-3 outline-none font-semibold"
             />
             {isDropdownVisible && searchResults?.length > 0 && (

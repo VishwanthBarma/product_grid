@@ -93,7 +93,7 @@ const Home: NextPage = () => {
           <div className='flex space-x-5 mt-2'>
 
           <div onClick={() => router.push('/personalisedproducts')} className='bg-white rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-xl shadow-lg'>
-              <h1 className='text-center font-semibold mb-3 text-xl bg-neutral-100 p-1 rounded-xl'>Personalised Products</h1>
+              <h1 className='text-center font-semibold mb-3 text-xl bg-neutral-100 p-1 rounded-xl'>Pick Up Where You Left Off</h1>
 
               <div className="grid grid-cols-2 gap-4 place-content-center mt-3">
               {
@@ -108,7 +108,7 @@ const Home: NextPage = () => {
 
 
             <div onClick={() => router.push('/topproducts')} className='bg-white rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-xl shadow-lg'>
-              <h1 className='text-center font-semibold mb-3 text-xl bg-neutral-100 p-1 rounded-xl'>Top Products</h1>
+              <h1 className='text-center font-semibold mb-3 text-xl bg-neutral-100 p-1 rounded-xl'>Suggested Products</h1>
 
               <div className="grid grid-cols-2 gap-4 place-content-center mt-3">
               {
@@ -123,7 +123,7 @@ const Home: NextPage = () => {
 
 
             <div onClick={() => router.push('/similaruserproducts')} className='bg-white rounded-xl w-1/3 p-3 cursor-pointer hover:shadow-xl shadow-lg'>
-              <h1 className='text-center font-semibold mb-3 text-xl bg-neutral-100 p-1 rounded-xl'>Based On Similar Users</h1>
+              <h1 className='text-center font-semibold mb-3 text-xl bg-neutral-100 p-1 rounded-xl'>You May Like</h1>
 
               <div className="grid grid-cols-2 gap-4 place-content-center mt-3">
               {

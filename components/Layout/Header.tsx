@@ -24,7 +24,7 @@ export default function Header(){
         <div className="sticky top-0 z-50 bg-white p-2 px-60 items-center flex justify-between shadow-neutral-300 shadow-sm">
 
             <Link href={"/"}>
-                <h1 className="font-bold text-xl">LOGO</h1>
+                <img src="/images/logo.png" alt="Logo" />
             </Link>
 
 
