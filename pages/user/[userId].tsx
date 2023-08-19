@@ -49,11 +49,11 @@ function User({user, usersData}: any) {
         user_mobile: newUserPhone,
         user_image: newUserImage
       })
-  
-      if(newUserResponse.data.success){
-        console.log("New user registered successfully.")
-        setIsUserAdded(true);
-      }
+      setIsUserAdded(true);
+      setNewUserEmail("example@gmail.com")
+      setNewUserName("")
+      setNewUserPhone("+91-xx-56-xx2789")
+      setNewUserImage("https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png")
     }catch(error){
       console.log("Error:", error);
     }

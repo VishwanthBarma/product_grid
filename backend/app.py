@@ -16,6 +16,23 @@ user_db_path = 'gridDB/usersDB.csv'
 wishlist_csv_path = 'gridDB/wishlistDB.csv'
 
 
+@app.route('/api/get-ordered-products/<int:user_id>', methods=['GET'])
+def get_ordered_products(user_id):
+    try:
+        user_product_relation = pd.read_csv('gridDB/userProductRelation.csv')
+        ordered_products = user_product_relation[(user_product_relation['user_id'] == user_id) & (user_product_relation['ordered_or_not'] == 1)]
+        ordered_product_ids = ordered_products['product_id'].tolist()
+        products_data = pd.read_csv('gridDB/productsDB.csv')
+        ordered_products_data = products_data[products_data['product_id'].isin(ordered_product_ids)]
+        ordered_products_data['avg_rating'] = ordered_products_data['avg_rating'].astype(float)
+        ordered_products_list = ordered_products_data.to_dict('records')
+
+        return jsonify(ordered_products_list)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
 @app.route('/api/register-new-user', methods=['POST'])
 def register_new_user():
     try:

@@ -123,7 +123,7 @@ function Product({image, name, description, rating, price, stock, productId, ori
             <h1 className='text-xs text-neutral-400'>{`${description.substring(0, 100)}...`}</h1>
         </div>
         <div className='flex space-x-1 items-center bg-green-600 text-white font-bold w-16 justify-center rounded-xl'>
-            <h1>{ rating.toFixed(2) }</h1>
+            <h1>{ rating?.toFixed(2) }</h1>
             <AiFillStar/>
         </div>
 
