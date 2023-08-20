@@ -133,7 +133,7 @@ const Home: NextPage = () => {
                   {
                     cartData.length == 0 && wishlistData.length == 0 ?
 
-                    <h1 className='text-sky-600 text-center mt-40 p-2 rounded-xl'>Add some products to wishlist to generate your product recommendations</h1>
+                    <h1 className='text-sky-600 text-center mt-40 p-2 rounded-xl'>WELCOME TO CustomPicks<br/>GO-AHEAD DO SOME SHOPIE SHOPIE<br /> We'll get you the Best Recommendations</h1>
                     :
                       <button onClick={() => {
                         getRecommendations();
