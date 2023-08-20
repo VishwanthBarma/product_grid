@@ -5,6 +5,7 @@ import { BsCurrencyRupee } from "react-icons/bs";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { ProductRecommendationContext } from '../Context/ProductRecommendationContext';
 import axios from 'axios';
+import { Toaster, toast } from 'react-hot-toast';
 
 
 function Product({image, name, description, rating, price, stock, productId, original_price, discount}: any) {
@@ -60,7 +61,6 @@ function Product({image, name, description, rating, price, stock, productId, ori
             if(updateRelation.data.success){
                 console.log("Updated userProductRelationDB for wishilisted item.")
             }
-
 
           } catch (error) {
             console.error('Error adding product to wishlist:', error);
