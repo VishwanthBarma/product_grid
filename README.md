@@ -1,4 +1,12 @@
 [documentation(CustomPicks).pdf](https://github.com/VishwanthBarma/product_grid/files/12550781/documentation.CustomPicks.pdf)
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
